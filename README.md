@@ -19,7 +19,7 @@ Primer proyecto de la ruta práctica de aprendizaje de Microsoft Azure.
 - [x] Instalar y verificar Azure CLI 2.91.0 (salida de `az version` comprobada).
 - [x] Iniciar sesión con Azure CLI y comprobar la suscripción activa: Azure for Students, Enabled, True (confirmado mediante salida filtrada).
 - [x] Crear y verificar `rg-azure-01-lab` en `westeurope` (`Succeeded`). Se comprobó vacío con `az resource list`.
-- [ ] Corregir etiqueta escrita `enviroment=lab` por `environment=lab` (pendiente de confirmación).
+- [x] Corregir etiqueta escrita `enviroment=lab` y verificar el resultado en Azure CLI.
 - [ ] Documentar resultados y limpiar recursos de prueba.
 
 ## Entorno local
@@ -34,7 +34,7 @@ Consulta la [guía de Azure CLI](docs/02-azure-cli.md), que recoge instalación 
 - Región: `westeurope`
 - Etiquetas: `project=azure-01`, `environment=lab`
 
-El grupo se ha creado y verificado. Las etiquetas desplegadas actualmente son `project=azure-01` y `enviroment=lab` (error tipográfico pendiente de corregir).
+El grupo se ha creado correctamente en `westeurope`. Las etiquetas `project=azure-01` y `environment=lab` se han comprobado mediante Azure CLI.
 
 ## Seguridad y coste
 

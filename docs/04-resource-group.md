@@ -1,6 +1,6 @@
 # 04 — Crear y comprobar el primer grupo de recursos
 
-**Estado:** Creado y comprobado en Azure mediante salida de Azure CLI compartida por el propietario. Región `westeurope`, aprovisionamiento `Succeeded`, sin recursos desplegados dentro del grupo. Hay una etiqueta con error tipográfico pendiente de corregir.
+**Estado:** Creado y comprobado en Azure mediante salida de Azure CLI compartida por el propietario. Región `westeurope`, aprovisionamiento `Succeeded`, sin recursos desplegados dentro del grupo. La etiqueta se ha corregido mediante `az group update` y se ha verificado su valor utilizando `az group show`.
 
 ## Antes de crear
 
