@@ -67,27 +67,32 @@ Verificar:
 az group show --name rg-azure-01-lab --query tags --output json
 ```
 
-Marcar resuelta la incidencia solo después de comprobar esa salida.
+**Incidencia resuelta:** se confirmó `environment=lab` y `project=azure-01` antes de eliminar el grupo.
 
-## 4. Limpieza (más adelante; NO EJECUTAR TODAVÍA)
+## 4. Limpieza — realizada y verificada
 
-Antes de eliminar nada, listar y revisar los recursos:
+Antes de eliminar nada, se comprobó que el grupo estaba vacío:
 
 ```bash
-az resource list --resource-group rg-azure-01-lab --output table
+az resource list --resource-group rg-azure-01-lab --query "length(@)" --output tsv
+# Resultado confirmado: 0
 ```
 
-Eliminar un grupo también elimina los recursos que haya dentro. **Solo cuando se cierre la práctica**, y tras comprobar su contenido, podría ejecutarse:
+El 23/10/2026 se eliminó el grupo, confirmando interactivamente la operación:
 
 ```bash
 az group delete --name rg-azure-01-lab
+# Confirmación manual: y
+
+az group exists --name rg-azure-01-lab
+# Resultado confirmado: false
 ```
 
-No añadir `--yes` ni `--no-wait` en esta fase inicial; es preferible leer el aviso de confirmación.
+**Estado final: `rg-azure-01-lab` eliminado.** Este comando es destructivo: eliminar un grupo borra los recursos que contenga. Si el laboratorio se reproduce, revisar siempre sus contenidos antes del borrado.
 
 ## Comprobación de costes
 
-Revisar semanalmente Cost Management > Análisis de costes y el presupuesto. Las alertas de gasto **no cortan automáticamente la facturación**. No publicar identificadores de suscripción, tokens o detalles personales en GitHub.
+El 23/10/2026, Azure Education mostraba 0,00 € de coste mensual y crédito restante de 88 €. La vista **Análisis de costes** generaba el error de oferta `WebDirect/AIRS`, pero el presupuesto configurado seguía visible. Utilizar **Education > Información general** para consultar crédito y gasto mientras persista la incidencia. Las alertas **no cortan automáticamente la facturación**. No publicar identificadores de suscripción, tokens o detalles personales en GitHub.
 
 Documentación oficial:
 - https://learn.microsoft.com/en-us/azure/azure-resource-manager/management/manage-resource-groups-cli
