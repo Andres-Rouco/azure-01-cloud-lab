@@ -15,17 +15,17 @@ Primer proyecto de la ruta práctica de aprendizaje de Microsoft Azure.
 - [x] Azure for Students activada (confirmación del propietario).
 - [x] Presupuesto y alertas configurados (confirmación del propietario).
 - [x] Repositorio GitHub creado.
-- [ ] Identificar subversión de Ubuntu 26.
-- [ ] Instalar o verificar Azure CLI.
+- [x] Identificar subversión: Ubuntu 26.04.1 LTS (`resolute`).
+- [x] Instalar y verificar Azure CLI 2.91.0 (salida de `az version` comprobada).
 - [ ] Iniciar sesión y comprobar la suscripción activa.
 - [ ] Crear y verificar el primer grupo de recursos.
 - [ ] Documentar resultados y limpiar recursos de prueba.
 
 ## Entorno local
 
-**Ubuntu 26.x**. La subversión exacta está pendiente de comprobar con `lsb_release -a`.
+**Ubuntu 26.04.1 LTS** (`resolute`, amd64), shell Zsh. **Azure CLI 2.91.0** instalada mediante APT y verificada con `az version`.
 
-Consulta [Instalación de Azure CLI](docs/02-azure-cli.md) antes de ejecutar comandos de instalación: Microsoft documenta soporte APT para **Ubuntu 26.04 LTS**, pero no debemos asumir que cualquier Ubuntu 26.x es idéntico.
+Consulta la [guía de Azure CLI](docs/02-azure-cli.md), que recoge instalación e incidencia de configuración APT, y la [autenticación](docs/03-login.md).
 
 ## Nombres previstos
 
@@ -42,4 +42,5 @@ Un grupo de recursos vacío no tiene coste propio. **Las alertas de presupuesto 
 ## Documentación
 
 - [Instalación y verificación de Azure CLI](docs/02-azure-cli.md)
+- [Inicio de sesión y selección de suscripción](docs/03-login.md)
 - [Guía oficial de Microsoft](https://learn.microsoft.com/cli/azure/install-azure-cli-linux?pivots=apt)
