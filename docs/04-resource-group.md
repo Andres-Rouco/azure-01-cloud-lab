@@ -1,6 +1,6 @@
 # 04 — Crear y comprobar el primer grupo de recursos
 
-**Estado:** Pendiente de ejecutar en Azure. Los comandos de esta guía no son evidencia de recursos ya desplegados.
+**Estado:** Creado y comprobado en Azure mediante salida de Azure CLI compartida por el propietario. Región `westeurope`, aprovisionamiento `Succeeded`, sin recursos desplegados dentro del grupo. Hay una etiqueta con error tipográfico pendiente de corregir.
 
 ## Antes de crear
 
@@ -48,7 +48,28 @@ az resource list --resource-group rg-azure-01-lab --output table
 
 El último comando debería dar una lista vacía si todavía no se ha desplegado ningún servicio. Confirmar visualmente en https://portal.azure.com > Grupos de recursos.
 
-## 3. Limpieza (más adelante; NO EJECUTAR TODAVÍA)
+## 3. Incidencia real: etiqueta con error tipográfico
+
+Al crear el grupo se utilizó `enviroment=lab` (falta la `n`). Azure lo admitió porque los nombres de etiquetas son libres. Para sustituir **el conjunto completo** de etiquetas por los dos valores previstos:
+
+```bash
+az group update \
+  --name rg-azure-01-lab \
+  --tags project=azure-01 environment=lab \
+  --output table
+```
+
+**Importante:** esta instrucción establece el conjunto de etiquetas; no usarla de forma irreflexiva si aparecen etiquetas adicionales que se necesiten conservar. En esta práctica solo se observaron las dos etiquetas iniciales.
+
+Verificar:
+
+```bash
+az group show --name rg-azure-01-lab --query tags --output json
+```
+
+Marcar resuelta la incidencia solo después de comprobar esa salida.
+
+## 4. Limpieza (más adelante; NO EJECUTAR TODAVÍA)
 
 Antes de eliminar nada, listar y revisar los recursos:
 
