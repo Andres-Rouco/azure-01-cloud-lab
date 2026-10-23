@@ -1,0 +1,15 @@
+# Credenciales y configuración local
+.env
+.env.*
+!.env.example
+.azure/
+**/.azure/
+*.pem
+*.pfx
+*.p12
+*.key
+**/__pycache__/
+.venv/
+*.tfstate
+*.tfstate.*
+.DS_Store
