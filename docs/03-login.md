@@ -1,6 +1,6 @@
 # 03 — Inicio de sesión y selección de suscripción
 
-**Estado:** Pendiente de ejecutar y comprobar.
+**Estado:** Completado y comprobado mediante salida de Azure CLI proporcionada por el propietario.
 
 Requisito: Azure CLI 2.91.0 ya instalada en Ubuntu 26.04.1 LTS.
 
@@ -26,7 +26,7 @@ Seguir las instrucciones en pantalla. **Nunca compartir el código temporal ni c
 az account show --query "{Subscription:name,State:state,Default:isDefault}" --output table
 ```
 
-Salida esperada: nombre Azure for Students, estado Enabled y Default True.
+**Salida confirmada:** nombre `Azure for Students`, estado `Enabled`, valor `Default=True`. El inicio de sesión mostró una selección interactiva de suscripción. Se observaron mensajes `Broken pipe` del navegador, pero la autenticación finalizó correctamente.
 
 Si se necesita listar opciones:
 
@@ -46,7 +46,7 @@ Ejecutar la comprobación de nuevo.
 
 - No hacer `git add` de `~/.azure/`.
 - No compartir tokens, contraseñas, códigos de dispositivo ni identificadores internos.
-- No ejecutar todavía comandos que creen servicios de pago.
+- No ejecutar comandos que creen servicios de pago sin revisar previamente su coste.
 - Al usar un equipo compartido, se puede salir con `az logout`.
 
 Fuentes:
