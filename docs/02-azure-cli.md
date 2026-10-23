@@ -1,63 +1,62 @@
-# 02 — Azure CLI en Ubuntu 26
+# 02 — Azure CLI en Ubuntu 26.04.1 LTS
 
-## 1. Confirmar versión exacta
+## Entorno confirmado
 
-```bash
-lsb_release -a
-```
+- Distribución: Ubuntu 26.04.1 LTS (Resolute)
+- Arquitectura: amd64
+- Shell: zsh
+- `az`: no detectado inicialmente
+- Dependencias y clave de Microsoft: instaladas y añadidas
+- Incidencia: se escribió el archivo `.sources` en una sola línea. APT devolvía `Entrada 1 mal especificada ... (URI)`.
 
-La guía oficial de Microsoft enumera Ubuntu 26.04 LTS (Resolute Raccoon) como distribución probada con paquetes APT de Azure CLI. La compatibilidad de otras subversiones de Ubuntu 26 no debe darse por supuesta.
+## Corregir repositorio APT (formato deb822)
 
-## 2. Comprobar si ya está instalada
-
-```bash
-command -v az && az version
-```
-
-## 3. Instalar en Ubuntu 26.04 LTS
-
-**Solo después de comprobar que la distribución es Ubuntu 26.04 LTS.** Para aprender de forma controlada, seguimos la instalación paso a paso de Microsoft. Ejecutar cada bloque por separado:
+Cada campo debe ir en **su propia línea**, con `URIs` escrito correctamente. Ejecutar el bloque completo, sin unir líneas ni editar el texto a mano:
 
 ```bash
-sudo apt-get update
-sudo apt-get install -y apt-transport-https ca-certificates curl gnupg lsb-release
-```
-
-```bash
-sudo mkdir -p /etc/apt/keyrings
-curl -sLS https://packages.microsoft.com/keys/microsoft.asc | \
-  gpg --dearmor | sudo tee /etc/apt/keyrings/microsoft.gpg > /dev/null
-sudo chmod go+r /etc/apt/keyrings/microsoft.gpg
-```
-
-```bash
-AZ_DIST=$(lsb_release -cs)
-echo "Types: deb
+sudo tee /etc/apt/sources.list.d/azure-cli.sources > /dev/null <<EOF
+Types: deb
 URIs: https://packages.microsoft.com/repos/azure-cli/
-Suites: ${AZ_DIST}
+Suites: resolute
 Components: main
-Architectures: $(dpkg --print-architecture)
-Signed-by: /etc/apt/keyrings/microsoft.gpg" | \
-  sudo tee /etc/apt/sources.list.d/azure-cli.sources
+Architectures: amd64
+Signed-By: /etc/apt/keyrings/microsoft.gpg
+EOF
 ```
 
+### Verificar formato
+
 ```bash
-sudo apt-get update
-sudo apt-get install -y azure-cli
+cat /etc/apt/sources.list.d/azure-cli.sources
+sudo apt update
+```
+
+Detenerse si `apt update` genera errores. No cambiar `resolute` por otra versión de Ubuntu para intentar resolverlos sin estudiar la causa.
+
+## Instalar y verificar
+
+```bash
+sudo apt install azure-cli
 az version
 ```
 
-Si Ubuntu 26.04 no coincide con la versión del equipo, o aparece un error de repositorio, **detenerse** y revisar antes de usar un repositorio de otra distribución.
+## Siguiente etapa: autenticación
 
-## 4. Inicio de sesión (cuando la instalación esté verificada)
+Solo cuando `az version` funcione:
 
 ```bash
 az login
 az account show --query "{name:name,state:state}" --output table
 ```
 
-Seleccionar la suscripción Azure for Students. No publicar los identificadores de suscripción ni los tokens de inicio de sesión en un repositorio público.
+Seleccionar `Azure for Students`. No subir identificadores, tokens ni el directorio `~/.azure` a GitHub.
 
-Fuentes oficiales:
+## Explicación del error
+
+- `$(AZ_DIST)` intenta ejecutar un comando llamado `AZ_DIST`; para obtener el valor de la variable se usa `${AZ_DIST}`.
+- Al escribir `Types: deb URIS: ... Suites: ...` en una sola línea, APT no interpreta correctamente los campos de un archivo **deb822**.
+- Un *here-document* delimitado por `EOF` garantiza la estructura multilínea cuando se copia correctamente.
+
+Referencias:
 - https://learn.microsoft.com/cli/azure/install-azure-cli-linux?pivots=apt
-- https://learn.microsoft.com/cli/azure/authenticate-azure-cli-interactively
+- https://manpages.ubuntu.com/manpages/resolute/en/man5/sources.list.5.html
