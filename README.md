@@ -17,8 +17,8 @@ Primer proyecto de la ruta práctica de aprendizaje de Microsoft Azure.
 - [x] Repositorio GitHub creado.
 - [x] Identificar subversión: Ubuntu 26.04.1 LTS (`resolute`).
 - [x] Instalar y verificar Azure CLI 2.91.0 (salida de `az version` comprobada).
-- [ ] Iniciar sesión y comprobar la suscripción activa.
-- [ ] Crear y verificar el primer grupo de recursos.
+- [x] Iniciar sesión con Azure CLI y comprobar la suscripción activa: Azure for Students, Enabled, True (confirmado mediante salida filtrada).
+- [ ] Crear y verificar el primer grupo de recursos (siguiente paso).
 - [ ] Documentar resultados y limpiar recursos de prueba.
 
 ## Entorno local
@@ -33,7 +33,7 @@ Consulta la [guía de Azure CLI](docs/02-azure-cli.md), que recoge instalación 
 - Región: `westeurope`
 - Etiquetas: `project=azure-01`, `environment=lab`
 
-Estos son parámetros **propuestos**, no recursos ya desplegados.
+Estos son parámetros **propuestos**; la creación del grupo está pendiente de ejecución y verificación.
 
 ## Seguridad y coste
 
@@ -43,4 +43,5 @@ Un grupo de recursos vacío no tiene coste propio. **Las alertas de presupuesto 
 
 - [Instalación y verificación de Azure CLI](docs/02-azure-cli.md)
 - [Inicio de sesión y selección de suscripción](docs/03-login.md)
+- [Primer grupo de recursos](docs/04-resource-group.md)
 - [Guía oficial de Microsoft](https://learn.microsoft.com/cli/azure/install-azure-cli-linux?pivots=apt)
